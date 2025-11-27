@@ -1,7 +1,7 @@
 /**
  * @file interrupts.hpp
- * @author Sasisekhar Govind
- * @brief template main.cpp file for Assignment 3 Part 1 of SYSC4001
+ * @author Aydan Eng, Eric Cui
+ * @brief template main.cpp file for Assignment 3 Part 1 of SYSC4001 amd includes Assignment 1 and 2 code 
  * 
  */
 
@@ -66,6 +66,84 @@ struct PCB{
     unsigned int    io_freq;
     unsigned int    io_duration;
 };
+
+//-------------------------------CODE FROM ASSINGMENT 1 AND ASSIGNMENT 2------------------------------
+
+const std::vector<std::string> VECTOR_TABLE = {
+    "0X01E3", 
+    "0X029C", 
+    "0X0695", 
+    "0X042B", 
+    "0X0292", 
+    "0X048B",
+    //don't need rest of the vectors for this assignment
+};
+
+// Boilerplate function for interrupts from assignment 1
+std::pair<std::string, int> intr_boilerplate(int current_time, int intr_num, int context_save_time)
+{
+    std::string execution = "";
+
+    execution += std::to_string(current_time) + ", " + std::to_string(1) + ", switch to kernel mode\n";
+    current_time++;
+
+    execution += std::to_string(current_time) + ", " + std::to_string(context_save_time) + ", context saved\n";
+    current_time += context_save_time;
+
+    char vector_address_c[10];
+    sprintf(vector_address_c, "0x%04X", (intr_num * 2));
+    std::string vector_address(vector_address_c);
+    std::string isr_address = (intr_num < (int)VECTOR_TABLE.size()) ? VECTOR_TABLE[intr_num] : "0X0000";
+
+    execution += std::to_string(current_time) + ", " + std::to_string(1) + ", find vector " + std::to_string(intr_num) + " in memory position " + vector_address + "\n";
+    current_time++;
+
+    execution += std::to_string(current_time) + ", " + std::to_string(1) + ", load address " + isr_address + " into the PC\n";
+    current_time++;
+
+    return std::make_pair(execution, current_time);
+}
+
+// CONTEXT SWIITCH
+std::pair<std::string, int> context_switch(int current_time) {
+    auto[execution, time] = intr_boilerplate(current_time, 2, 10);
+    execution += std::to_string(time) + ", 1, IRET\n";
+    time += 1;
+    return std::make_pair(execution, time);
+}
+
+// Note: No longer random IO delays (was random in A2) to properly compare RR, EP and EP_RR
+
+// SYSCCALL
+std::pair<std::string, int> system_call(int current_time) {
+    auto[execution, time] = intr_boilerplate(current_time, 3, 4);
+    execution += std::to_string(time) + ", 1, obtain ISR address\n";
+    time += 1;
+    execution += std::to_string(time) + ", 2, Call device driver\n";
+    time += 2;
+    execution += std::to_string(time) + ", 1, Perform device check\n"; 
+    time += 1;
+    execution += std::to_string(time) + ", 1, Send device instruction\n";
+    time += 1;
+    execution += std::to_string(time) + ", 1, IRET\n";
+    time += 1;
+    return std::make_pair(execution, time);
+}
+
+// END_IO
+std::pair<std::string, int> end_io(int current_time) {
+    auto[execution, time] = intr_boilerplate(current_time, 4, 4);
+    execution += std::to_string(time) + ", 2, store information in memory\n"; 
+    time += 2;
+    execution += std::to_string(time) + ", 1, reset the io operation\n"; 
+    time += 1;
+    execution += std::to_string(time) + ", 1, Send standby instruction\n"; 
+    time += 1;
+    execution += std::to_string(time) + ", 1, IRET\n";
+    time += 1;
+    return std::make_pair(execution, time);
+}
+
 
 //------------------------------------HELPER FUNCTIONS FOR THE SIMULATOR------------------------------
 // Following function was taken from stackoverflow; helper function for splitting strings
