@@ -144,7 +144,7 @@ std::tuple<std::string /* add std::string for bonus mark */> run_simulation(std:
         // Execution
         if (running.PID != -1)
         {
-            current_time+=1;
+            current_time += 1;
             running.remaining_time -= 1;
             running.time_since_io += 1;
             running.time_slice_time += 1;
@@ -171,7 +171,7 @@ std::tuple<std::string /* add std::string for bonus mark */> run_simulation(std:
                     }
                     else
                     {
-                        mem_it+=1;
+                        mem_it += 1;
                     }
                 }
             }
@@ -193,7 +193,7 @@ std::tuple<std::string /* add std::string for bonus mark */> run_simulation(std:
         }
         else
         {
-            current_time+=1;
+            current_time += 1;
         }
     }
 
@@ -241,7 +241,7 @@ int main(int argc, char **argv)
     // With the list of processes, run the simulation
     auto [exec] = run_simulation(list_process);
 
-    write_output(exec, "execution.txt");
+    write_output(exec, "executionEP.txt");
 
     return 0;
 }
