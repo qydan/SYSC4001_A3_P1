@@ -16,4 +16,4 @@ If this were mimicing a real system including ISR and Context Switch latency, th
 | System Call (I/O Request) | 13 ms| Switch (1) + Save (4) + Vector (1) + Load Addr (1) + ISR Addr (1) + Driver (2) + Check (1) + Send (1) + IRET (1) |
 | End I/O (Interrupt) | 13 ms| Switch (1) + Save (4) + Vector (1) + Load Addr (1) + ISR Addr (1) + Store (2) + Reset (1) + Standby (1) + IRET (1) |
 
-Impact: In a real-world implementation, these overheads would cause significant drift from the idealized timestamps.
+Impact: In a real OS system, these overhead delays would cause significant drift from the idealized timestamps.

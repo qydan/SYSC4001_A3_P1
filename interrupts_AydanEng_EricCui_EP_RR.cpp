@@ -124,7 +124,7 @@ std::tuple<std::string /* add std::string for bonus mark */> run_simulation(std:
             }
             else
             {
-                wait_iterator++;
+                wait_iterator += 1;
             }
         }
         /////////////////////////////////////////////////////////////////
@@ -145,7 +145,7 @@ std::tuple<std::string /* add std::string for bonus mark */> run_simulation(std:
                 if (!ready_queue.empty())
                 {
                     sort_by_priority(ready_queue);
-                    //see preemption.md for brief explanation
+                    // see preemption.md for brief explanation
                     preempt = true;
                 }
                 else
@@ -194,7 +194,7 @@ std::tuple<std::string /* add std::string for bonus mark */> run_simulation(std:
         // execution
         if (running.PID != -1)
         {
-            current_time++;
+            current_time += 1;
             running.remaining_time -= 1;
             running.time_since_io += 1;
             running.time_slice_time += 1;
@@ -217,7 +217,7 @@ std::tuple<std::string /* add std::string for bonus mark */> run_simulation(std:
                     }
                     else
                     {
-                        job_it++;
+                        job_it += 1;
                     }
                 }
 
@@ -238,12 +238,12 @@ std::tuple<std::string /* add std::string for bonus mark */> run_simulation(std:
                     }
                     else
                     {
-                        ++mem_it;
+                        mem_it += 1;
                     }
                 }
             }
 
-            // I/O Request
+            // IO Request
             else if (running.io_freq > 0 && running.time_since_io >= running.io_freq)
             {
                 auto [log, new_time] = system_call(current_time);

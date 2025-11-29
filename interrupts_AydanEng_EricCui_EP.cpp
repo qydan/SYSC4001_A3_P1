@@ -144,7 +144,7 @@ std::tuple<std::string /* add std::string for bonus mark */> run_simulation(std:
         // Execution
         if (running.PID != -1)
         {
-            current_time++;
+            current_time+=1;
             running.remaining_time -= 1;
             running.time_since_io += 1;
             running.time_slice_time += 1;
@@ -171,7 +171,7 @@ std::tuple<std::string /* add std::string for bonus mark */> run_simulation(std:
                     }
                     else
                     {
-                        ++mem_it;
+                        mem_it+=1;
                     }
                 }
             }
@@ -193,7 +193,7 @@ std::tuple<std::string /* add std::string for bonus mark */> run_simulation(std:
         }
         else
         {
-            current_time++;
+            current_time+=1;
         }
     }
 
