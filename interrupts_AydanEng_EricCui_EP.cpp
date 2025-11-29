@@ -38,7 +38,7 @@ std::tuple<std::string /* add std::string for bonus mark */> run_simulation(std:
 
     // Loop while till there are no ready or waiting processes.
     // This is the main reason I have job_list, you don't have to use it.
-    while (!list_processes.empty() || !job_list.empty())
+    while (!list_processes.empty() || !all_process_terminated(job_list))
     {
 
         // Inside this loop, there are three things you must do:
@@ -61,11 +61,6 @@ std::tuple<std::string /* add std::string for bonus mark */> run_simulation(std:
         //     }
         // }
 
-        if (list_processes.empty() && ready_queue.empty() && wait_queue.empty() && memory_wait_queue.empty() && running.PID == -1)
-        {
-            break;
-        }
-
         // Populate ready queue
         auto iterator = list_processes.begin();
         while (iterator != list_processes.end())
@@ -81,7 +76,7 @@ std::tuple<std::string /* add std::string for bonus mark */> run_simulation(std:
                     ready_queue.push_back(temporary);
                     job_list.push_back(temporary);
                     execution_status += print_exec_status(current_time, temporary.PID, NEW, READY);
-                    print_memory_usage(current_time); // BONUS
+                    print_memory_usage(current_time); // BONUS, print memory usage to terminal
                 }
                 else
                 {
