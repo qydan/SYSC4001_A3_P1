@@ -1,0 +1,41 @@
++------------------------------------------------+
+|Time of Transition |PID | Old State | New State |
++------------------------------------------------+
+|                 0 |  5 |       NEW |     READY |
+|                 0 |  5 |     READY |   RUNNING |
+|                10 |  1 |       NEW |     READY |
+|               100 |  5 |   RUNNING |     READY |
+|               100 |  1 |     READY |   RUNNING |
+|               105 |  1 |   RUNNING |   WAITING |
+|               105 |  5 |     READY |   RUNNING |
+|               110 |  1 |   WAITING |     READY |
+|               205 |  5 |   RUNNING |     READY |
+|               205 |  1 |     READY |   RUNNING |
+|               210 |  1 |   RUNNING |   WAITING |
+|               210 |  5 |     READY |   RUNNING |
+|               215 |  1 |   WAITING |     READY |
+|               310 |  5 |   RUNNING |TERMINATED |
+|               310 |  1 |     READY |   RUNNING |
+|               315 |  1 |   RUNNING |   WAITING |
+|               320 |  1 |   WAITING |     READY |
+|               320 |  1 |     READY |   RUNNING |
+|               325 |  1 |   RUNNING |   WAITING |
+|               330 |  1 |   WAITING |     READY |
+|               330 |  1 |     READY |   RUNNING |
+|               335 |  1 |   RUNNING |   WAITING |
+|               340 |  1 |   WAITING |     READY |
+|               340 |  1 |     READY |   RUNNING |
+|               345 |  1 |   RUNNING |   WAITING |
+|               350 |  1 |   WAITING |     READY |
+|               350 |  1 |     READY |   RUNNING |
+|               355 |  1 |   RUNNING |   WAITING |
+|               360 |  1 |   WAITING |     READY |
+|               360 |  1 |     READY |   RUNNING |
+|               365 |  1 |   RUNNING |   WAITING |
+|               370 |  1 |   WAITING |     READY |
+|               370 |  1 |     READY |   RUNNING |
+|               375 |  1 |   RUNNING |   WAITING |
+|               380 |  1 |   WAITING |     READY |
+|               380 |  1 |     READY |   RUNNING |
+|               385 |  1 |   RUNNING |TERMINATED |
++------------------------------------------------+
